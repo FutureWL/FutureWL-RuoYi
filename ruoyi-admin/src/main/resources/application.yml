@@ -78,10 +78,9 @@ spring:
   boot:
     admin:
       client:
-        url: http://192.168.0.216:9999 # The URL of the Spring Boot Admin Server to register at.
+        url: http://sba.wxf.server.huntercat.cn # The URL of the Spring Boot Admin Server to register at.
         instance:
-          service-base-url: http://192.168.0.220:10011
-
+          service-base-url: http://my-ruoyi.wxf.server.huntercat.cn
 # MyBatis
 mybatis:
     # 搜索指定包别名
