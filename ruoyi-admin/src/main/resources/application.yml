@@ -16,7 +16,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为80
-  port: 80
+  port: 10011
   servlet:
     # 应用的访问路径
     context-path: /
@@ -45,6 +45,8 @@ user:
 
 # Spring配置
 spring:
+  application:
+    name: My-Ruoyi
   # 模板引擎
   thymeleaf:
     mode: HTML
@@ -72,6 +74,13 @@ spring:
     restart:
       # 热部署开关
       enabled: true
+  # spring boot admin 配置
+  boot:
+    admin:
+      client:
+        url: http://192.168.0.216:9999 # The URL of the Spring Boot Admin Server to register at.
+        instance:
+          service-base-url: http://192.168.0.220:10011
 
 # MyBatis
 mybatis:
@@ -140,3 +149,13 @@ xss:
 swagger:
   # 是否开启swagger
   enabled: true
+
+# management 配置
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

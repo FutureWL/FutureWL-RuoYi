@@ -6,11 +6,9 @@
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
     <version>4.7.3</version>
-
     <name>ruoyi</name>
     <url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
-    
     <properties>
         <ruoyi.version>4.7.3</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,8 +30,8 @@
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
+        <spring-boot-admin.version>2.6.2</spring-boot-admin.version>
     </properties>
-
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
@@ -214,7 +212,6 @@
 
         </dependencies>
     </dependencyManagement>
-
     <modules>
         <module>ruoyi-admin</module>
         <module>ruoyi-framework</module>
@@ -224,12 +221,17 @@
         <module>ruoyi-common</module>
     </modules>
     <packaging>pom</packaging>
-
-
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -244,7 +246,6 @@
             </plugin>
         </plugins>
     </build>
-
     <repositories>
         <repository>
             <id>public</id>
@@ -255,7 +256,6 @@
             </releases>
         </repository>
     </repositories>
-
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
@@ -269,5 +269,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 </project>
