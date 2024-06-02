@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.my.mapper.MyGoodsMapper">
+    
+    <resultMap type="MyGoods" id="MyGoodsResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="price"    column="price"    />
+    </resultMap>
+
+    <sql id="selectMyGoodsVo">
+        select id, name, price from my_goods
+    </sql>
+
+    <select id="selectMyGoodsList" parameterType="MyGoods" resultMap="MyGoodsResult">
+        <include refid="selectMyGoodsVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="price != null "> and price = #{price}</if>
+        </where>
+    </select>
+    
+    <select id="selectMyGoodsById" parameterType="Long" resultMap="MyGoodsResult">
+        <include refid="selectMyGoodsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMyGoods" parameterType="MyGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into my_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="price != null">price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="price != null">#{price},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMyGoods" parameterType="MyGoods">
+        update my_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMyGoodsById" parameterType="Long">
+        delete from my_goods where id = #{id}
+    </delete>
+
+    <delete id="deleteMyGoodsByIds" parameterType="String">
+        delete from my_goods where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
